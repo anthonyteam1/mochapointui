@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
 using System.Windows.Forms;
 
 namespace MochaPointInventory
@@ -46,11 +47,22 @@ namespace MochaPointInventory
                 Location = new System.Drawing.Point(350, 360),
                 Size = new System.Drawing.Size(100, 40)
             };
-            buttonBack.Click += (sender, e) => this.Close();
+            buttonBack.Click += ButtonBack_Click;
 
             // Add controls to the form
             this.Controls.Add(dataGridView);
             this.Controls.Add(buttonBack);
+        }
+
+        // Back button click event
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            // Close the current ViewInventory form
+            this.Close();
+
+            // Create and show the MainMenu form
+            MainMenu mainMenuForm = new MainMenu();
+            mainMenuForm.Show();
         }
     }
 }

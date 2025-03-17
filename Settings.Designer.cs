@@ -1,16 +1,12 @@
-﻿namespace MochaPointInventory
+﻿using System;
+using System.Windows.Forms;
+
+namespace MochaPointInventory
 {
     partial class Settings
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,160 +16,129 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.buttonBack = new System.Windows.Forms.Button();
+            this.textBoxNewPassword = new System.Windows.Forms.TextBox();
+            this.buttonSavePassword = new System.Windows.Forms.Button();
+            this.labelNewPassword = new System.Windows.Forms.Label();
+            this.labelSelectIngredient = new System.Windows.Forms.Label();
+            this.comboBoxIngredients = new System.Windows.Forms.ComboBox();
+            this.labelThreshold = new System.Windows.Forms.Label();
+            this.numericUpDownThreshold = new System.Windows.Forms.NumericUpDown();
             this.buttonAcceptChanges = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.buttonBack = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThreshold)).BeginInit();
             this.SuspendLayout();
             // 
-            // labelTitle
+            // textBoxNewPassword
             // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitle.Location = new System.Drawing.Point(256, 26);
-            this.labelTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(99, 26);
-            this.labelTitle.TabIndex = 5;
-            this.labelTitle.Text = "Settings";
-            this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
+            this.textBoxNewPassword.Location = new System.Drawing.Point(32, 263);
+            this.textBoxNewPassword.Name = "textBoxNewPassword";
+            this.textBoxNewPassword.Size = new System.Drawing.Size(200, 22);
+            this.textBoxNewPassword.TabIndex = 0;
             // 
-            // label1
+            // buttonSavePassword
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(37, 159);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(205, 26);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Change Password";
+            this.buttonSavePassword.Location = new System.Drawing.Point(32, 327);
+            this.buttonSavePassword.Name = "buttonSavePassword";
+            this.buttonSavePassword.Size = new System.Drawing.Size(200, 23);
+            this.buttonSavePassword.TabIndex = 1;
+            this.buttonSavePassword.Text = "Save New Password";
+            this.buttonSavePassword.UseVisualStyleBackColor = true;
+            this.buttonSavePassword.Click += new System.EventHandler(this.buttonSavePassword_Click);
             // 
-            // textBox1
+            // labelNewPassword
             // 
-            this.textBox1.Location = new System.Drawing.Point(40, 204);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(202, 20);
-            this.textBox1.TabIndex = 7;
+            this.labelNewPassword.AutoSize = true;
+            this.labelNewPassword.Location = new System.Drawing.Point(74, 174);
+            this.labelNewPassword.Name = "labelNewPassword";
+            this.labelNewPassword.Size = new System.Drawing.Size(100, 16);
+            this.labelNewPassword.TabIndex = 2;
+            this.labelNewPassword.Text = "New Password:";
             // 
-            // label2
+            // labelSelectIngredient
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(391, 105);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(192, 26);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Select Ingredient";
+            this.labelSelectIngredient.AutoSize = true;
+            this.labelSelectIngredient.Location = new System.Drawing.Point(494, 81);
+            this.labelSelectIngredient.Name = "labelSelectIngredient";
+            this.labelSelectIngredient.Size = new System.Drawing.Size(110, 16);
+            this.labelSelectIngredient.TabIndex = 3;
+            this.labelSelectIngredient.Text = "Select Ingredient:";
             // 
-            // label3
+            // comboBoxIngredients
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(360, 187);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(243, 26);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Notification Threshold";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.comboBoxIngredients.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxIngredients.FormattingEnabled = true;
+            this.comboBoxIngredients.Location = new System.Drawing.Point(488, 166);
+            this.comboBoxIngredients.Name = "comboBoxIngredients";
+            this.comboBoxIngredients.Size = new System.Drawing.Size(200, 24);
+            this.comboBoxIngredients.TabIndex = 4;
             // 
-            // numericUpDown1
+            // labelThreshold
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(417, 225);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(166, 20);
-            this.numericUpDown1.TabIndex = 10;
+            this.labelThreshold.AutoSize = true;
+            this.labelThreshold.Location = new System.Drawing.Point(494, 235);
+            this.labelThreshold.Name = "labelThreshold";
+            this.labelThreshold.Size = new System.Drawing.Size(140, 16);
+            this.labelThreshold.TabIndex = 5;
+            this.labelThreshold.Text = "Notification Threshold:";
             // 
-            // comboBox1
+            // numericUpDownThreshold
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(419, 148);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(164, 21);
-            this.comboBox1.TabIndex = 11;
-            // 
-            // buttonBack
-            // 
-            this.buttonBack.Location = new System.Drawing.Point(261, 345);
-            this.buttonBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(56, 19);
-            this.buttonBack.TabIndex = 12;
-            this.buttonBack.Text = "Back";
+            this.numericUpDownThreshold.Location = new System.Drawing.Point(488, 289);
+            this.numericUpDownThreshold.Name = "numericUpDownThreshold";
+            this.numericUpDownThreshold.Size = new System.Drawing.Size(200, 22);
+            this.numericUpDownThreshold.TabIndex = 6;
             // 
             // buttonAcceptChanges
             // 
-            this.buttonAcceptChanges.Location = new System.Drawing.Point(72, 241);
+            this.buttonAcceptChanges.Location = new System.Drawing.Point(488, 327);
             this.buttonAcceptChanges.Name = "buttonAcceptChanges";
-            this.buttonAcceptChanges.Size = new System.Drawing.Size(133, 33);
-            this.buttonAcceptChanges.TabIndex = 13;
+            this.buttonAcceptChanges.Size = new System.Drawing.Size(200, 23);
+            this.buttonAcceptChanges.TabIndex = 7;
             this.buttonAcceptChanges.Text = "Accept Changes";
+            this.buttonAcceptChanges.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonBack
             // 
-            this.button1.Location = new System.Drawing.Point(431, 250);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 33);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Accept Changes";
+            this.buttonBack.Location = new System.Drawing.Point(361, 467);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.Size = new System.Drawing.Size(100, 23);
+            this.buttonBack.TabIndex = 8;
+            this.buttonBack.Text = "Back";
+            this.buttonBack.UseVisualStyleBackColor = true;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // Settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(647, 390);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.buttonAcceptChanges);
+            this.ClientSize = new System.Drawing.Size(782, 528);
             this.Controls.Add(this.buttonBack);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.labelTitle);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.buttonAcceptChanges);
+            this.Controls.Add(this.numericUpDownThreshold);
+            this.Controls.Add(this.labelThreshold);
+            this.Controls.Add(this.comboBoxIngredients);
+            this.Controls.Add(this.labelSelectIngredient);
+            this.Controls.Add(this.labelNewPassword);
+            this.Controls.Add(this.buttonSavePassword);
+            this.Controls.Add(this.textBoxNewPassword);
             this.Name = "Settings";
             this.Text = "Settings";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Load += new System.EventHandler(this.Settings_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThreshold)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
-        #endregion
-
-        private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label2;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button buttonBack;
+        private System.Windows.Forms.TextBox textBoxNewPassword;
+        private System.Windows.Forms.Button buttonSavePassword;
+        private System.Windows.Forms.Label labelNewPassword;
+        private System.Windows.Forms.Label labelSelectIngredient;
+        private System.Windows.Forms.ComboBox comboBoxIngredients;
+        private System.Windows.Forms.Label labelThreshold;
+        private System.Windows.Forms.NumericUpDown numericUpDownThreshold;
         private System.Windows.Forms.Button buttonAcceptChanges;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonBack;
     }
 }
+

@@ -13,16 +13,39 @@ namespace MochaPointInventory
 {
     public partial class LoginScreen : Form
     {
-        private const string DefaultPassword = "ILOVECOFFEE"; // Temporary hardcoded password
-
         public LoginScreen()
         {
-            InitializeComponent(); // Ensures the controls are initialized
+            InitializeComponent();
+
+
+            // Set the default button to the Login button (this makes Enter key trigger the login button)
+            this.AcceptButton = buttonLogin;
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            if (textBoxPassword.Text == DefaultPassword)
+            HandleLogin();
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void textBoxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                HandleLogin(); // Trigger login if Enter is pressed
+            }
+        }
+
+        private void HandleLogin()
+        {
+            string storedPassword = Database.GetPassword();  // Get the stored password from the database
+            MessageBox.Show("Stored Password: " + storedPassword); // Debugging line
+
+            if (textBoxPassword.Text == storedPassword)  // Check the entered password
             {
                 MainMenu mainMenu = new MainMenu();
                 mainMenu.Show();
@@ -33,11 +56,7 @@ namespace MochaPointInventory
                 MessageBox.Show("Incorrect password. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void buttonExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
     }
-}
+    }
+
 

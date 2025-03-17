@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Windows.Forms;
 
 namespace MochaPointInventory
@@ -15,14 +16,16 @@ namespace MochaPointInventory
         private void buttonManualEntry_Click(object sender, EventArgs e)
         {
             ManualEntry manualEntryForm = new ManualEntry();
-            manualEntryForm.Show();
+            manualEntryForm.Show();  // Show the ManualEntry form
+            this.Hide();  // Hide the MainMenu form
         }
 
         // Event handler for View Inventory button click
         private void buttonViewInventory_Click(object sender, EventArgs e)
         {
             ViewInventory viewInventoryForm = new ViewInventory();
-            viewInventoryForm.Show();
+            viewInventoryForm.Show();  // Show the ViewInventory form
+            this.Hide();  // Hide the MainMenu form
         }
 
         // Event handler for Import from Excel button click (Adjusted)
@@ -30,24 +33,28 @@ namespace MochaPointInventory
         {
             ImportFromCSV importFromCSVForm = new ImportFromCSV(); // Create the ImportFromCSV form instance
             importFromCSVForm.Show(); // Show the ImportFromCSV form
+            this.Hide();  // Hide the MainMenu form
         }
 
         // Event handler for Settings button click
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             Settings settingsForm = new Settings();
-            settingsForm.Show();
+            settingsForm.Show();  // Show the Settings form
+            this.Hide();  // Hide the MainMenu form
         }
 
         // Event handler for Exit button click
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Application.Exit();  // Close the application
         }
 
+        // Event handler for Form Load
         private void MainMenu_Load(object sender, EventArgs e)
         {
 
         }
     }
 }
+
