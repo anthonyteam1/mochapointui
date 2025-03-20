@@ -6,63 +6,66 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+
 using System;
+using System.Data.SQLite;
 using System.Windows.Forms;
 
 namespace MochaPointInventory
 {
     public partial class ViewInventory : Form
     {
-        // Constructor
         public ViewInventory()
         {
-            InitializeComponent();
+            InitializeComponent(); // This will initialize the UI from the Designer file
+            LoadInventory();       // Loading the inventory from the database
         }
 
-        // UI Setup
-        private void InitializeComponent()  // <-- This should be the ONLY InitializeComponent() method
+        private void LoadInventory()
         {
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "View Inventory";
-
-            // Table (DataGridView) setup
-            DataGridView dataGridView = new DataGridView
+            // Set up connection to the database
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=C:\\Users\\Owner\\AppData\\Local\\Inventory.db;Version=3;"))
             {
-                ColumnCount = 4,
-                Columns =
+                connection.Open();
+
+                // SQL query to retrieve the data we need from Inventory table
+                string query = "SELECT IngredientName, CurrentQuantity, Unit, Threshold FROM Inventory";
+
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 {
-                    [0] = { Name = "Ingredient" },
-                    [1] = { Name = "Quantity" },
-                    [2] = { Name = "Unit of Measurement" },
-                    [3] = { Name = "Notification Threshold" }
-                },
-                Dock = DockStyle.Top,
-                Height = 300
-            };
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        // Clear any existing rows in DataGridView before adding new ones
+                        dataGridView.Rows.Clear();
 
-            // Back Button
-            Button buttonBack = new Button
-            {
-                Text = "Back",
-                Location = new System.Drawing.Point(350, 360),
-                Size = new System.Drawing.Size(100, 40)
-            };
-            buttonBack.Click += ButtonBack_Click;
+                        // Populate DataGridView with the data from the database
+                        while (reader.Read())
+                        {
+                            string ingredientName = reader["IngredientName"].ToString();
+                            double currentQuantity = Convert.ToDouble(reader["CurrentQuantity"]);
+                            string unit = reader["Unit"].ToString();
+                            double threshold = Convert.ToDouble(reader["Threshold"]);
 
-            // Add controls to the form
-            this.Controls.Add(dataGridView);
-            this.Controls.Add(buttonBack);
+                            // Add a row to the DataGridView
+                            dataGridView.Rows.Add(ingredientName, currentQuantity, unit, threshold);
+                        }
+                    }
+                }
+            }
         }
 
         // Back button click event
         private void ButtonBack_Click(object sender, EventArgs e)
         {
-            // Close the current ViewInventory form
             this.Close();
-
-            // Create and show the MainMenu form
             MainMenu mainMenuForm = new MainMenu();
             mainMenuForm.Show();
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

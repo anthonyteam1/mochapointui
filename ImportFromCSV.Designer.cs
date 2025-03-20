@@ -4,6 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
+using System;
+using System.IO;
+using System.Windows.Forms;
+
 namespace MochaPointInventory
 {
     partial class ImportFromCSV
@@ -33,36 +37,45 @@ namespace MochaPointInventory
             // 
             // buttonUpdateInventory
             // 
+            this.buttonUpdateInventory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonUpdateInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.buttonUpdateInventory.Location = new System.Drawing.Point(411, 15);
             this.buttonUpdateInventory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonUpdateInventory.Name = "buttonUpdateInventory";
             this.buttonUpdateInventory.Size = new System.Drawing.Size(200, 37);
             this.buttonUpdateInventory.TabIndex = 3;
             this.buttonUpdateInventory.Text = "Upload Clover Spreadsheet";
-            this.buttonUpdateInventory.Click += new System.EventHandler(this.buttonUpdateInventory_Click);
+            this.buttonUpdateInventory.UseVisualStyleBackColor = false;
             // 
             // buttonAcceptChanges
             // 
-            this.buttonAcceptChanges.Location = new System.Drawing.Point(411, 470);
+            this.buttonAcceptChanges.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonAcceptChanges.Location = new System.Drawing.Point(421, 458);
             this.buttonAcceptChanges.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAcceptChanges.Name = "buttonAcceptChanges";
             this.buttonAcceptChanges.Size = new System.Drawing.Size(177, 41);
             this.buttonAcceptChanges.TabIndex = 4;
             this.buttonAcceptChanges.Text = "Accept Changes";
+            this.buttonAcceptChanges.UseVisualStyleBackColor = false;
             this.buttonAcceptChanges.Click += new System.EventHandler(this.buttonAcceptChanges_Click);
             // 
             // buttonBack
             // 
-            this.buttonBack.Location = new System.Drawing.Point(463, 517);
+            this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonBack.Location = new System.Drawing.Point(463, 507);
             this.buttonBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(75, 23);
+            this.buttonBack.Size = new System.Drawing.Size(79, 34);
             this.buttonBack.TabIndex = 13;
             this.buttonBack.Text = "Back";
+            this.buttonBack.UseVisualStyleBackColor = false;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // dataGridViewInventory
             // 
+            this.dataGridViewInventory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewInventory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IngredientColumn,
@@ -74,33 +87,30 @@ namespace MochaPointInventory
             this.dataGridViewInventory.RowHeadersWidth = 51;
             this.dataGridViewInventory.Size = new System.Drawing.Size(1013, 369);
             this.dataGridViewInventory.TabIndex = 14;
-            this.dataGridViewInventory.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewInventory_CellContentClick);
             // 
             // IngredientColumn
             // 
             this.IngredientColumn.HeaderText = "Ingredient";
             this.IngredientColumn.MinimumWidth = 6;
             this.IngredientColumn.Name = "IngredientColumn";
-            this.IngredientColumn.Width = 125;
             // 
             // UnitOfMeasurementColumn
             // 
             this.UnitOfMeasurementColumn.HeaderText = "Unit of Measurement";
             this.UnitOfMeasurementColumn.MinimumWidth = 6;
             this.UnitOfMeasurementColumn.Name = "UnitOfMeasurementColumn";
-            this.UnitOfMeasurementColumn.Width = 125;
             // 
             // NewInventoryLevelColumn
             // 
             this.NewInventoryLevelColumn.HeaderText = "New Inventory Level";
             this.NewInventoryLevelColumn.MinimumWidth = 6;
             this.NewInventoryLevelColumn.Name = "NewInventoryLevelColumn";
-            this.NewInventoryLevelColumn.Width = 125;
             // 
             // ImportFromCSV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonAcceptChanges);

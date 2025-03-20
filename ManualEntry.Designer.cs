@@ -1,28 +1,23 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace MochaPointInventory
-{
-    partial class ManualEntry
+    namespace MochaPointInventory
     {
-        private System.ComponentModel.IContainer components = null;
-        private ComboBox comboBoxItems;
-        private NumericUpDown numericUpDownQuantity;
-        private Button buttonUpdateInventory;
-        private Button buttonBack;
-        private Label labelTitle;
-        private Label label1;
-        private Label label2;
-        private ComboBox comboBox1;
-        private Label label3;
-        private Label label4;
-        private ComboBox comboBox2;
-        private Label label5;
-        private NumericUpDown numericUpDown1;
-        private Label label6;
-
-        private void InitializeComponent()
+        partial class ManualEntry
         {
+            private System.ComponentModel.IContainer components = null;
+            private ComboBox comboBoxItems;
+            private NumericUpDown numericUpDownQuantity;
+            private Button buttonUpdateInventory;
+            private Button buttonBack;
+            private Label labelTitle;
+            private Label label1;
+            private Label label2;
+            private ComboBox comboBox1;
+            private Label label3;
+
+            private void InitializeComponent()
+            {
             this.comboBoxItems = new System.Windows.Forms.ComboBox();
             this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
             this.buttonUpdateInventory = new System.Windows.Forms.Button();
@@ -36,44 +31,51 @@ namespace MochaPointInventory
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
+            this.buttonUpdateInventory2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxItems
             // 
-            this.comboBoxItems.Items.AddRange(new object[] {
-            "Item1",
-            "Item2",
-            "Item3"});
             this.comboBoxItems.Location = new System.Drawing.Point(70, 157);
             this.comboBoxItems.Name = "comboBoxItems";
             this.comboBoxItems.Size = new System.Drawing.Size(150, 24);
             this.comboBoxItems.TabIndex = 0;
+            this.comboBoxItems.SelectedIndexChanged += new System.EventHandler(this.comboBoxItems_SelectedIndexChanged);
             // 
             // numericUpDownQuantity
             // 
             this.numericUpDownQuantity.Location = new System.Drawing.Point(84, 321);
+            this.numericUpDownQuantity.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.numericUpDownQuantity.Name = "numericUpDownQuantity";
             this.numericUpDownQuantity.Size = new System.Drawing.Size(120, 22);
             this.numericUpDownQuantity.TabIndex = 1;
             // 
             // buttonUpdateInventory
             // 
-            this.buttonUpdateInventory.Location = new System.Drawing.Point(285, 375);
+            this.buttonUpdateInventory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonUpdateInventory.Location = new System.Drawing.Point(70, 375);
             this.buttonUpdateInventory.Name = "buttonUpdateInventory";
             this.buttonUpdateInventory.Size = new System.Drawing.Size(150, 30);
             this.buttonUpdateInventory.TabIndex = 2;
             this.buttonUpdateInventory.Text = "Update Inventory";
+            this.buttonUpdateInventory.UseVisualStyleBackColor = false;
+            this.buttonUpdateInventory.Click += new System.EventHandler(this.buttonUpdateInventory_Click);
             // 
             // buttonBack
             // 
+            this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.buttonBack.Location = new System.Drawing.Point(313, 411);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(79, 34);
             this.buttonBack.TabIndex = 3;
             this.buttonBack.Text = "Back";
+            this.buttonBack.UseVisualStyleBackColor = false;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // labelTitle
@@ -109,9 +111,8 @@ namespace MochaPointInventory
             // comboBox1
             // 
             this.comboBox1.Items.AddRange(new object[] {
-            "Item1",
-            "Item2",
-            "Item3"});
+            "Add",
+            "Subtract"});
             this.comboBox1.Location = new System.Drawing.Point(70, 246);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(150, 24);
@@ -131,7 +132,7 @@ namespace MochaPointInventory
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(449, 125);
+            this.label4.Location = new System.Drawing.Point(520, 171);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(184, 29);
             this.label4.TabIndex = 9;
@@ -139,11 +140,7 @@ namespace MochaPointInventory
             // 
             // comboBox2
             // 
-            this.comboBox2.Items.AddRange(new object[] {
-            "Item1",
-            "Item2",
-            "Item3"});
-            this.comboBox2.Location = new System.Drawing.Point(465, 157);
+            this.comboBox2.Location = new System.Drawing.Point(534, 214);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(150, 24);
             this.comboBox2.TabIndex = 10;
@@ -152,33 +149,40 @@ namespace MochaPointInventory
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(435, 214);
+            this.label5.Location = new System.Drawing.Point(511, 255);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(214, 29);
+            this.label5.Size = new System.Drawing.Size(184, 29);
             this.label5.TabIndex = 11;
-            this.label5.Text = "Set New Quantity";
+            this.label5.Text = "Select Product";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(474, 248);
+            this.numericUpDown1.Location = new System.Drawing.Point(547, 297);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
             this.numericUpDown1.TabIndex = 12;
             // 
-            // label6
+            // buttonUpdateInventory2
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(307, 182);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 31);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "OR";
+            this.buttonUpdateInventory2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonUpdateInventory2.Location = new System.Drawing.Point(534, 375);
+            this.buttonUpdateInventory2.Name = "buttonUpdateInventory2";
+            this.buttonUpdateInventory2.Size = new System.Drawing.Size(150, 30);
+            this.buttonUpdateInventory2.TabIndex = 13;
+            this.buttonUpdateInventory2.Text = "Update Inventory";
+            this.buttonUpdateInventory2.UseVisualStyleBackColor = false;
+            this.buttonUpdateInventory2.Click += new System.EventHandler(this.buttonUpdateInventory2_Click);
             // 
             // ManualEntry
             // 
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(782, 528);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.buttonUpdateInventory2);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox2);
@@ -200,5 +204,12 @@ namespace MochaPointInventory
             this.PerformLayout();
 
         }
+
+        private Label label4;
+        private ComboBox comboBox2;
+        private Label label5;
+        private NumericUpDown numericUpDown1;
+        private Button buttonUpdateInventory2;
     }
 }
+

@@ -6,7 +6,6 @@ namespace MochaPointInventory
 {
     public partial class MainMenu : Form
     {
-        // Constructor
         public MainMenu()
         {
             InitializeComponent();
@@ -53,8 +52,9 @@ namespace MochaPointInventory
         // Event handler for Form Load
         private void MainMenu_Load(object sender, EventArgs e)
         {
-
+            Database.CheckInventoryLevels();
         }
+
     }
 }
 

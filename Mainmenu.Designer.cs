@@ -25,12 +25,14 @@ namespace MochaPointInventory
             this.buttonExit = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
+            this.Notification = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonManualEntry
             // 
-            this.buttonManualEntry.Location = new System.Drawing.Point(288, 290);
+            this.buttonManualEntry.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonManualEntry.Location = new System.Drawing.Point(192, 290);
             this.buttonManualEntry.Name = "buttonManualEntry";
             this.buttonManualEntry.Size = new System.Drawing.Size(200, 50);
             this.buttonManualEntry.TabIndex = 1;
@@ -40,7 +42,7 @@ namespace MochaPointInventory
             // 
             // buttonViewInventory
             // 
-            this.buttonViewInventory.Location = new System.Drawing.Point(288, 346);
+            this.buttonViewInventory.Location = new System.Drawing.Point(398, 290);
             this.buttonViewInventory.Name = "buttonViewInventory";
             this.buttonViewInventory.Size = new System.Drawing.Size(200, 50);
             this.buttonViewInventory.TabIndex = 2;
@@ -50,7 +52,7 @@ namespace MochaPointInventory
             // 
             // buttonImportFromExcel
             // 
-            this.buttonImportFromExcel.Location = new System.Drawing.Point(288, 402);
+            this.buttonImportFromExcel.Location = new System.Drawing.Point(192, 346);
             this.buttonImportFromExcel.Name = "buttonImportFromExcel";
             this.buttonImportFromExcel.Size = new System.Drawing.Size(200, 50);
             this.buttonImportFromExcel.TabIndex = 3;
@@ -60,7 +62,7 @@ namespace MochaPointInventory
             // 
             // buttonSettings
             // 
-            this.buttonSettings.Location = new System.Drawing.Point(288, 458);
+            this.buttonSettings.Location = new System.Drawing.Point(398, 346);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(200, 50);
             this.buttonSettings.TabIndex = 4;
@@ -71,7 +73,7 @@ namespace MochaPointInventory
             // buttonExit
             // 
             this.buttonExit.BackColor = System.Drawing.Color.Red;
-            this.buttonExit.Location = new System.Drawing.Point(288, 514);
+            this.buttonExit.Location = new System.Drawing.Point(398, 402);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(200, 50);
             this.buttonExit.TabIndex = 5;
@@ -92,15 +94,26 @@ namespace MochaPointInventory
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.labelTitle.Location = new System.Drawing.Point(281, 252);
+            this.labelTitle.Location = new System.Drawing.Point(259, 252);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(219, 22);
+            this.labelTitle.Size = new System.Drawing.Size(273, 29);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "Mocha Point Inventory";
             // 
+            // Notification
+            // 
+            this.Notification.Location = new System.Drawing.Point(192, 402);
+            this.Notification.Name = "Notification";
+            this.Notification.Size = new System.Drawing.Size(200, 50);
+            this.Notification.TabIndex = 7;
+            this.Notification.Text = "Notifications";
+            this.Notification.UseVisualStyleBackColor = true;
+            // 
             // MainMenu
             // 
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(782, 588);
+            this.Controls.Add(this.Notification);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonSettings);
@@ -108,6 +121,7 @@ namespace MochaPointInventory
             this.Controls.Add(this.buttonViewInventory);
             this.Controls.Add(this.buttonManualEntry);
             this.Controls.Add(this.pictureBox);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.Name = "MainMenu";
             this.Text = "Main Menu";
             this.Load += new System.EventHandler(this.MainMenu_Load);
@@ -116,6 +130,8 @@ namespace MochaPointInventory
             this.PerformLayout();
 
         }
+
+        private Button Notification;
     }
 }
 

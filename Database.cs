@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace MochaPointInventory
@@ -10,6 +11,7 @@ namespace MochaPointInventory
 
         public static SQLiteConnection GetConnection()
         {
+            MessageBox.Show($"Database Path: {DbFilePath}");
             var connection = new SQLiteConnection($"Data Source={DbFilePath};Version=3;");
             return connection;
         }
@@ -124,8 +126,9 @@ namespace MochaPointInventory
             {
                 connection.Open();
 
-                // Check if the ingredient exists in the Inventory table
-                string checkQuery = "SELECT IngredientId, CurrentQuantity FROM Inventory WHERE IngredientId = (SELECT Id FROM Ingredients WHERE IngredientName = @IngredientName)";
+                // Check if the ingredient exists in the Inventory table by IngredientName
+                string checkQuery = "SELECT CurrentQuantity FROM Inventory WHERE IngredientName = @IngredientName";
+
                 using (var checkCommand = new SQLiteCommand(checkQuery, connection))
                 {
                     checkCommand.Parameters.AddWithValue("@IngredientName", ingredientName);
@@ -134,17 +137,16 @@ namespace MochaPointInventory
                     {
                         if (reader.Read())
                         {
-                            int ingredientId = Convert.ToInt32(reader["IngredientId"]);
                             double currentQuantity = Convert.ToDouble(reader["CurrentQuantity"]);
 
                             // Subtract quantity but prevent negative values
                             double newQuantity = Math.Max(currentQuantity - quantityToSubtract, 0);
 
-                            string updateQuery = "UPDATE Inventory SET CurrentQuantity = @NewQuantity WHERE IngredientId = @Id";
+                            string updateQuery = "UPDATE Inventory SET CurrentQuantity = @NewQuantity WHERE IngredientName = @IngredientName";
                             using (var updateCommand = new SQLiteCommand(updateQuery, connection))
                             {
                                 updateCommand.Parameters.AddWithValue("@NewQuantity", newQuantity);
-                                updateCommand.Parameters.AddWithValue("@Id", ingredientId);
+                                updateCommand.Parameters.AddWithValue("@IngredientName", ingredientName);
                                 updateCommand.ExecuteNonQuery();
                             }
                         }
@@ -157,7 +159,8 @@ namespace MochaPointInventory
             }
         }
 
-        // Updated method to use CurrentQuantity instead of BaseQuantity
+
+        // Updated method to use CurrentQuantity instead of BaseQuantity!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public static void AddOrUpdateIngredient(string ingredientName, string unit, double quantityToSubtract)
         {
             using (var connection = GetConnection())
@@ -165,7 +168,7 @@ namespace MochaPointInventory
                 connection.Open();
 
                 // Check if the ingredient already exists in the Inventory table
-                string checkQuery = "SELECT IngredientId, CurrentQuantity FROM Inventory WHERE IngredientId = (SELECT Id FROM Ingredients WHERE IngredientName = @IngredientName)";
+                string checkQuery = "SELECT CurrentQuantity FROM Inventory WHERE IngredientName = @IngredientName";
                 using (var checkCommand = new SQLiteCommand(checkQuery, connection))
                 {
                     checkCommand.Parameters.AddWithValue("@IngredientName", ingredientName);
@@ -175,7 +178,6 @@ namespace MochaPointInventory
                         if (reader.Read())
                         {
                             // Ingredient exists — Update the quantity
-                            int ingredientId = Convert.ToInt32(reader["IngredientId"]);
                             double currentQuantity = Convert.ToDouble(reader["CurrentQuantity"]);
 
                             // Ensure quantity doesn't go negative
@@ -185,11 +187,11 @@ namespace MochaPointInventory
                                 newQuantity = 0; // Set to 0 if quantity is negative after subtraction
                             }
 
-                            string updateQuery = "UPDATE Inventory SET CurrentQuantity = @NewQuantity WHERE IngredientId = @Id";
+                            string updateQuery = "UPDATE Inventory SET CurrentQuantity = @NewQuantity WHERE IngredientName = @IngredientName";
                             using (var updateCommand = new SQLiteCommand(updateQuery, connection))
                             {
                                 updateCommand.Parameters.AddWithValue("@NewQuantity", newQuantity);
-                                updateCommand.Parameters.AddWithValue("@Id", ingredientId);
+                                updateCommand.Parameters.AddWithValue("@IngredientName", ingredientName);
                                 updateCommand.ExecuteNonQuery();
                             }
                         }
@@ -197,32 +199,57 @@ namespace MochaPointInventory
                         {
                             // Ingredient does NOT exist — Insert it with a starting quantity (this should not normally happen if inventory is correct)
                             string insertQuery = @"
-                            INSERT INTO Ingredients (IngredientName, Unit) 
-                            VALUES (@IngredientName, @Unit)";
+                    INSERT INTO Inventory (IngredientName, CurrentQuantity, Unit, Threshold) 
+                    VALUES (@IngredientName, @CurrentQuantity, @Unit, @Threshold)";
                             using (var insertCommand = new SQLiteCommand(insertQuery, connection))
                             {
                                 insertCommand.Parameters.AddWithValue("@IngredientName", ingredientName);
+                                insertCommand.Parameters.AddWithValue("@CurrentQuantity", 1000); // Starting quantity
                                 insertCommand.Parameters.AddWithValue("@Unit", unit);
+                                insertCommand.Parameters.AddWithValue("@Threshold", 500); // Example threshold value
                                 insertCommand.ExecuteNonQuery();
-                            }
-
-                            // After inserting, we need to add a record into the Inventory table
-                            string insertInventoryQuery = @"
-                            INSERT INTO Inventory (IngredientId, CurrentQuantity, Unit, Threshold) 
-                            VALUES ((SELECT Id FROM Ingredients WHERE IngredientName = @IngredientName), @CurrentQuantity, @Unit, @Threshold)";
-                            using (var inventoryInsertCommand = new SQLiteCommand(insertInventoryQuery, connection))
-                            {
-                                inventoryInsertCommand.Parameters.AddWithValue("@IngredientName", ingredientName);
-                                inventoryInsertCommand.Parameters.AddWithValue("@CurrentQuantity", 1000); // Starting quantity
-                                inventoryInsertCommand.Parameters.AddWithValue("@Unit", unit);
-                                inventoryInsertCommand.Parameters.AddWithValue("@Threshold", 500); // Example threshold value
-                                inventoryInsertCommand.ExecuteNonQuery();
                             }
                         }
                     }
                 }
             }
         }
+        public static void CheckInventoryLevels()
+        {
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=C:\\Users\\Owner\\AppData\\Local\\inventory.db;Version=3;"))
+            {
+                connection.Open();
+
+                string query = "SELECT IngredientName, CurrentQuantity, Threshold FROM Inventory WHERE CurrentQuantity <= Threshold";
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string ingredientName = reader["IngredientName"].ToString();
+                        double currentQuantity = Convert.ToDouble(reader["CurrentQuantity"]);
+                        double threshold = Convert.ToDouble(reader["Threshold"]);
+
+                        ShowNotification($"{ingredientName} is low!", $"Only {currentQuantity} remaining (Threshold: {threshold})");
+                    }
+                }
+            }
+        }
+
+        private static void ShowNotification(string title, string message)
+        {
+            NotifyIcon notifyIcon = new NotifyIcon
+            {
+                Icon = SystemIcons.Warning,
+                Visible = true,
+                BalloonTipTitle = title,
+                BalloonTipText = message
+            };
+
+            notifyIcon.ShowBalloonTip(5000);  // 5 seconds
+        }
     }
 }
+
+
 
