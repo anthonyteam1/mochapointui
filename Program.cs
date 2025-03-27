@@ -12,7 +12,7 @@ namespace MochaPointInventory
         [STAThread]
         static void Main()
         {
-            Database.CreateDatabase(); // Add this line somewhere in the program start
+            
 
             // Enable visual styles for the application
             Application.EnableVisualStyles();

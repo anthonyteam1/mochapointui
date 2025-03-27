@@ -40,18 +40,19 @@ namespace MochaPointInventory
             this.buttonUpdateInventory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.buttonUpdateInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.buttonUpdateInventory.Location = new System.Drawing.Point(411, 15);
-            this.buttonUpdateInventory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonUpdateInventory.Margin = new System.Windows.Forms.Padding(4);
             this.buttonUpdateInventory.Name = "buttonUpdateInventory";
             this.buttonUpdateInventory.Size = new System.Drawing.Size(200, 37);
             this.buttonUpdateInventory.TabIndex = 3;
             this.buttonUpdateInventory.Text = "Upload Clover Spreadsheet";
             this.buttonUpdateInventory.UseVisualStyleBackColor = false;
+            this.buttonUpdateInventory.Click += new System.EventHandler(this.buttonUpdateInventory_Click);
             // 
             // buttonAcceptChanges
             // 
             this.buttonAcceptChanges.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.buttonAcceptChanges.Location = new System.Drawing.Point(421, 458);
-            this.buttonAcceptChanges.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAcceptChanges.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAcceptChanges.Name = "buttonAcceptChanges";
             this.buttonAcceptChanges.Size = new System.Drawing.Size(177, 41);
             this.buttonAcceptChanges.TabIndex = 4;
@@ -65,7 +66,7 @@ namespace MochaPointInventory
             | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.buttonBack.Location = new System.Drawing.Point(463, 507);
-            this.buttonBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(4);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(79, 34);
             this.buttonBack.TabIndex = 13;
@@ -81,11 +82,11 @@ namespace MochaPointInventory
             this.IngredientColumn,
             this.UnitOfMeasurementColumn,
             this.NewInventoryLevelColumn});
-            this.dataGridViewInventory.Location = new System.Drawing.Point(16, 74);
-            this.dataGridViewInventory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewInventory.Location = new System.Drawing.Point(24, 60);
+            this.dataGridViewInventory.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewInventory.Name = "dataGridViewInventory";
             this.dataGridViewInventory.RowHeadersWidth = 51;
-            this.dataGridViewInventory.Size = new System.Drawing.Size(1013, 369);
+            this.dataGridViewInventory.Size = new System.Drawing.Size(1013, 390);
             this.dataGridViewInventory.TabIndex = 14;
             // 
             // IngredientColumn
@@ -116,7 +117,7 @@ namespace MochaPointInventory
             this.Controls.Add(this.buttonAcceptChanges);
             this.Controls.Add(this.buttonUpdateInventory);
             this.Controls.Add(this.dataGridViewInventory);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ImportFromCSV";
             this.Text = "ImportFromCSV";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInventory)).EndInit();

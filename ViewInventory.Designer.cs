@@ -34,39 +34,46 @@ namespace MochaPointInventory
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4});
-            this.dataGridView.Location = new System.Drawing.Point(39, 52);
+            this.dataGridView.Location = new System.Drawing.Point(12, 41);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersWidth = 51;
-            this.dataGridView.Size = new System.Drawing.Size(713, 300);
+            this.dataGridView.Size = new System.Drawing.Size(842, 381);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
             // buttonBack
             // 
-            this.buttonBack.Location = new System.Drawing.Point(351, 387);
+            this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.buttonBack.Location = new System.Drawing.Point(342, 428);
             this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(100, 40);
+            this.buttonBack.Size = new System.Drawing.Size(200, 50);
             this.buttonBack.TabIndex = 1;
             this.buttonBack.Text = "Back";
+            this.buttonBack.UseVisualStyleBackColor = false;
             this.buttonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
             // dataGridViewTextBoxColumn1
             // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Ingredient Name";
             this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
             // dataGridViewTextBoxColumn2
             // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Current Inventory";
             this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
             // dataGridViewTextBoxColumn3
             // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Unit of Measurement";
             this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
             // dataGridViewTextBoxColumn4
             // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Notification Threshold";
             this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
@@ -74,7 +81,7 @@ namespace MochaPointInventory
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.labelTitle.Location = new System.Drawing.Point(310, 9);
+            this.labelTitle.Location = new System.Drawing.Point(337, 9);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(183, 29);
             this.labelTitle.TabIndex = 2;
@@ -83,7 +90,7 @@ namespace MochaPointInventory
             // ViewInventory
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(866, 490);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.buttonBack);

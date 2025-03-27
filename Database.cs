@@ -11,86 +11,8 @@ namespace MochaPointInventory
 
         public static SQLiteConnection GetConnection()
         {
-            MessageBox.Show($"Database Path: {DbFilePath}");
             var connection = new SQLiteConnection($"Data Source={DbFilePath};Version=3;");
             return connection;
-        }
-
-        public static void CreateDatabase()
-        {
-            string folderPath = @"C:\Users\Owner\AppData\Local";
-
-            // Ensure folder exists
-            if (!System.IO.Directory.Exists(folderPath))
-            {
-                System.IO.Directory.CreateDirectory(folderPath);
-            }
-
-            // Create database if it doesn't exist
-            if (!System.IO.File.Exists(DbFilePath))
-            {
-                SQLiteConnection.CreateFile(DbFilePath);
-
-                using (var connection = GetConnection())
-                {
-                    connection.Open();
-                    string createTablesScript = @"
-                    CREATE TABLE IF NOT EXISTS UserSettings (
-                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        Password TEXT NOT NULL
-                    );
-                    INSERT OR IGNORE INTO UserSettings (Password) VALUES ('ILOVECOFFEE');
-
-                    CREATE TABLE IF NOT EXISTS Products (
-                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        ProductName TEXT NOT NULL,
-                        BaseQuantity REAL NOT NULL,
-                        BaseUnit TEXT NOT NULL
-                    );
-
-                    CREATE TABLE IF NOT EXISTS Ingredients (
-                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        IngredientName TEXT NOT NULL,
-                        Unit TEXT NOT NULL
-                    );
-
-                    CREATE TABLE IF NOT EXISTS ProductIngredients (
-                        ProductId INTEGER,
-                        IngredientId INTEGER,
-                        QuantityPerDrink REAL NOT NULL,
-                        FOREIGN KEY(ProductId) REFERENCES Products(Id),
-                        FOREIGN KEY(IngredientId) REFERENCES Ingredients(Id),
-                        PRIMARY KEY(ProductId, IngredientId)
-                    );
-
-                    CREATE TABLE IF NOT EXISTS SalesData (
-                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        ProductName TEXT NOT NULL,
-                        DrinksSold INTEGER NOT NULL,
-                        ModifierName TEXT NOT NULL,
-                        ModifierUnitsSold INTEGER NOT NULL
-                    );
-
-                    CREATE TABLE IF NOT EXISTS Inventory (
-                        IngredientId INTEGER PRIMARY KEY,
-                        CurrentQuantity REAL NOT NULL,
-                        Unit TEXT NOT NULL,
-                        Threshold REAL NOT NULL,
-                        FOREIGN KEY(IngredientId) REFERENCES Ingredients(Id)
-                    );
-
-                    CREATE TABLE IF NOT EXISTS ThresholdNotifications (
-                        IngredientId INTEGER PRIMARY KEY,
-                        NotificationEmail TEXT NOT NULL,
-                        FOREIGN KEY(IngredientId) REFERENCES Inventory(IngredientId)
-                    );";
-
-                    using (var command = new SQLiteCommand(createTablesScript, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
         }
 
         public static string GetPassword()
@@ -120,6 +42,7 @@ namespace MochaPointInventory
                 }
             }
         }
+
         public static void SubtractFromInventory(string ingredientName, double quantityToSubtract)
         {
             using (var connection = GetConnection())
@@ -159,8 +82,6 @@ namespace MochaPointInventory
             }
         }
 
-
-        // Updated method to use CurrentQuantity instead of BaseQuantity!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public static void AddOrUpdateIngredient(string ingredientName, string unit, double quantityToSubtract)
         {
             using (var connection = GetConnection())
@@ -214,13 +135,14 @@ namespace MochaPointInventory
                 }
             }
         }
+
         public static void CheckInventoryLevels()
         {
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=C:\\Users\\Owner\\AppData\\Local\\inventory.db;Version=3;"))
             {
                 connection.Open();
 
-                string query = "SELECT IngredientName, CurrentQuantity, Threshold FROM Inventory WHERE CurrentQuantity <= Threshold";
+                string query = "SELECT IngredientName, CurrentQuantity, Threshold FROM Inventory";
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
@@ -228,9 +150,28 @@ namespace MochaPointInventory
                     {
                         string ingredientName = reader["IngredientName"].ToString();
                         double currentQuantity = Convert.ToDouble(reader["CurrentQuantity"]);
-                        double threshold = Convert.ToDouble(reader["Threshold"]);
+                        double threshold = reader["Threshold"] != DBNull.Value ? Convert.ToDouble(reader["Threshold"]) : 0; // Default to 0 or another safe value
 
-                        ShowNotification($"{ingredientName} is low!", $"Only {currentQuantity} remaining (Threshold: {threshold})");
+
+                        // Only trigger notification if quantity is equal to or below the threshold
+                        if (currentQuantity <= threshold)
+                        {
+                            // Insert into NotificationLog
+                            string logQuery = "INSERT INTO NotificationLog (IngredientName, AlertDateTime, QuantityAtAlert) " +
+                                              "VALUES (@IngredientName, @AlertDateTime, @QuantityAtAlert)";
+
+                            using (SQLiteCommand logCommand = new SQLiteCommand(logQuery, connection))
+                            {
+                                logCommand.Parameters.AddWithValue("@IngredientName", ingredientName);
+                                logCommand.Parameters.AddWithValue("@AlertDateTime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                                logCommand.Parameters.AddWithValue("@QuantityAtAlert", currentQuantity);
+
+                                logCommand.ExecuteNonQuery();
+                            }
+
+                            // Show desktop notification
+                            ShowNotification($"{ingredientName} is low!", $"Only {currentQuantity} remaining (Threshold: {threshold})");
+                        }
                     }
                 }
             }
@@ -250,6 +191,4 @@ namespace MochaPointInventory
         }
     }
 }
-
-
 

@@ -42,7 +42,7 @@
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(176, 158);
+            this.textBoxPassword.Location = new System.Drawing.Point(121, 158);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(200, 22);
             this.textBoxPassword.TabIndex = 1;
@@ -50,7 +50,7 @@
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(176, 205);
+            this.buttonLogin.Location = new System.Drawing.Point(121, 208);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(200, 30);
             this.buttonLogin.TabIndex = 2;
@@ -62,7 +62,7 @@
             // 
             this.labelPassword.AutoSize = true;
             this.labelPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.labelPassword.Location = new System.Drawing.Point(232, 135);
+            this.labelPassword.Location = new System.Drawing.Point(172, 135);
             this.labelPassword.Name = "labelPassword";
             this.labelPassword.Size = new System.Drawing.Size(88, 20);
             this.labelPassword.TabIndex = 0;
@@ -73,7 +73,7 @@
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.labelTitle.Location = new System.Drawing.Point(151, 70);
+            this.labelTitle.Location = new System.Drawing.Point(75, 66);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(273, 29);
             this.labelTitle.TabIndex = 3;
@@ -82,7 +82,7 @@
             // pictureBox
             // 
             this.pictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox.BackgroundImage")));
-            this.pictureBox.Location = new System.Drawing.Point(430, 21);
+            this.pictureBox.Location = new System.Drawing.Point(405, 30);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(256, 232);
             this.pictureBox.TabIndex = 7;

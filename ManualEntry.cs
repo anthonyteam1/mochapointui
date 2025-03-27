@@ -6,13 +6,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
-using System.Windows.Forms;
-
 namespace MochaPointInventory
 {
     public partial class ManualEntry : Form
@@ -104,6 +97,9 @@ namespace MochaPointInventory
             else if (addOrSubtract == "Subtract")
             {
                 newQuantity -= quantityChange;
+
+                // Call the method to log ingredient usage when subtracting
+                DecrementInventoryAndLogUsage(selectedItem, quantityChange);
             }
 
             // Update the database with the new quantity
@@ -212,9 +208,41 @@ namespace MochaPointInventory
             return success;
         }
 
+        // Method to log ingredient usage and decrement inventory
+        private void DecrementInventoryAndLogUsage(string ingredientName, int quantityUsed)
+        {
+            // Step 1: Update Inventory - Decrease the quantity
+            string updateInventoryQuery = "UPDATE inventory SET CurrentQuantity = CurrentQuantity - @QuantityUsed WHERE IngredientName = @IngredientName";
+
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=C:\\Users\\Owner\\AppData\\Local\\inventory.db"))
+            {
+                connection.Open();
+
+                // Step 2: Execute the Inventory update
+                using (SQLiteCommand command = new SQLiteCommand(updateInventoryQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@QuantityUsed", quantityUsed);
+                    command.Parameters.AddWithValue("@IngredientName", ingredientName);
+                    command.ExecuteNonQuery();
+                }
+
+                // Step 3: Insert a record into IngredientUsage table to log the usage
+                string insertUsageQuery = "INSERT INTO IngredientUsage (IngredientName, QuantityUsed, UsageDate) " +
+                                          "VALUES (@IngredientName, @QuantityUsed, @UsageDate)";
+
+                using (SQLiteCommand command = new SQLiteCommand(insertUsageQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@IngredientName", ingredientName);
+                    command.Parameters.AddWithValue("@QuantityUsed", quantityUsed);
+                    command.Parameters.AddWithValue("@UsageDate", DateTime.Now.ToString("yyyy-MM-dd")); // Log the current date
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         private void comboBoxItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            // Handle any comboBox item selection changes if needed
         }
     }
 }

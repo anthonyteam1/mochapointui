@@ -42,7 +42,7 @@ namespace MochaPointInventory
             // 
             this.buttonSavePassword.Location = new System.Drawing.Point(32, 327);
             this.buttonSavePassword.Name = "buttonSavePassword";
-            this.buttonSavePassword.Size = new System.Drawing.Size(200, 23);
+            this.buttonSavePassword.Size = new System.Drawing.Size(179, 43);
             this.buttonSavePassword.TabIndex = 1;
             this.buttonSavePassword.Text = "Save New Password";
             this.buttonSavePassword.UseVisualStyleBackColor = true;
@@ -72,9 +72,9 @@ namespace MochaPointInventory
             // 
             // buttonAcceptChanges
             // 
-            this.buttonAcceptChanges.Location = new System.Drawing.Point(488, 327);
+            this.buttonAcceptChanges.Location = new System.Drawing.Point(514, 327);
             this.buttonAcceptChanges.Name = "buttonAcceptChanges";
-            this.buttonAcceptChanges.Size = new System.Drawing.Size(200, 23);
+            this.buttonAcceptChanges.Size = new System.Drawing.Size(174, 43);
             this.buttonAcceptChanges.TabIndex = 7;
             this.buttonAcceptChanges.Text = "Accept Changes";
             this.buttonAcceptChanges.UseVisualStyleBackColor = true;
@@ -125,11 +125,11 @@ namespace MochaPointInventory
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.labelTitle.Location = new System.Drawing.Point(334, 37);
+            this.labelTitle.Location = new System.Drawing.Point(319, 32);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(108, 29);
+            this.labelTitle.Size = new System.Drawing.Size(162, 29);
             this.labelTitle.TabIndex = 13;
-            this.labelTitle.Text = "Settings";
+            this.labelTitle.Text = "App Settings";
             // 
             // Settings
             // 

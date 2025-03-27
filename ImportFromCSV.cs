@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
@@ -8,7 +10,7 @@ namespace MochaPointInventory
 {
     public partial class ImportFromCSV : Form
     {
-        private const string DbFilePath = @"C:\Users\Owner\AppData\Local\Inventory.db";
+        private const string DbFilePath = @"C:\\Users\\Owner\\AppData\\Local\\Inventory.db";
 
         public ImportFromCSV()
         {
@@ -33,9 +35,10 @@ namespace MochaPointInventory
                 try
                 {
                     string[] lines = File.ReadAllLines(openFileDialog.FileName);
-
-                    // Clear existing data in the DataGridView
                     dataGridViewInventory.Rows.Clear();
+
+                    // Dictionary to store total quantity sold per ingredient
+                    Dictionary<string, int> ingredientSales = new Dictionary<string, int>();
 
                     // Start processing from row 15 (index 14)
                     foreach (string line in lines.Skip(15))
@@ -45,28 +48,90 @@ namespace MochaPointInventory
                         if (values.Length >= 5)
                         {
                             string ingredient = values[3].Trim();  // Modifier Name
-                            string unit = "oz";  // Default unit for all ingredients
                             if (int.TryParse(values[4].Trim(), out int quantitySold))
                             {
-                                // Get current inventory data from database
-                                double currentQuantity = GetCurrentInventory(ingredient);
+                                if (ingredientSales.ContainsKey(ingredient))
+                                    ingredientSales[ingredient] += quantitySold;
+                                else
+                                    ingredientSales[ingredient] = quantitySold;
+                            }
+                        }
+                    }
+
+                    using (var connection = GetConnection())
+                    {
+                        connection.Open();
+                        var transaction = connection.BeginTransaction(); // Start transaction
+
+                        try
+                        {
+                            // Process each ingredient once
+                            foreach (var entry in ingredientSales)
+                            {
+                                string ingredient = entry.Key;
+                                int totalQuantitySold = entry.Value;
+                                string unit = "oz"; // Default unit
+
+                                double currentQuantity = GetCurrentInventory(ingredient, connection);
 
                                 if (currentQuantity >= 0) // Ingredient found
                                 {
-                                    double newInventoryLevel = Math.Max(currentQuantity - quantitySold, 0);
-
-                                    // Update database with new inventory level
-                                    UpdateInventory(ingredient, newInventoryLevel);
-
-                                    // Update DataGridView
-                                    dataGridViewInventory.Rows.Add(ingredient, unit, newInventoryLevel);
+                                    double newInventoryLevel = Math.Max(currentQuantity - totalQuantitySold, 0);
+                                    UpdateInventory(ingredient, newInventoryLevel, connection);
                                 }
-                                else
+                                else // Ingredient not found, add it
                                 {
-                                    MessageBox.Show($"Ingredient '{ingredient}' not found in inventory.",
-                                        "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    double newInventoryLevel = Math.Max(0 - totalQuantitySold, 0);
+                                    AddIngredientToInventory(ingredient, newInventoryLevel, unit, connection);
+                                }
+
+                                // Update DataGridView
+                                dataGridViewInventory.Rows.Add(ingredient, unit, GetCurrentInventory(ingredient, connection));
+                            }
+
+                            // Additional feature to subtract quantities for ingredients in drinks (column B in the CSV)
+                            foreach (string line in lines.Skip(15))
+                            {
+                                string[] values = line.Split(',');
+
+                                if (values.Length >= 2) // Check for Drink Name in Column B
+                                {
+                                    string drinkName = values[1].Trim();  // Column B: Drink Name
+
+                                    if (!string.IsNullOrEmpty(drinkName))
+                                    {
+                                        // Get ingredients for this drink from DrinkIngredients table
+                                        string getIngredientsQuery = "SELECT IngredientName, Quantity FROM DrinkIngredients WHERE DrinkName = @DrinkName";
+                                        using (var command = new SQLiteCommand(getIngredientsQuery, connection))
+                                        {
+                                            command.Parameters.AddWithValue("@DrinkName", drinkName);
+                                            using (var reader = command.ExecuteReader())
+                                            {
+                                                while (reader.Read())
+                                                {
+                                                    string ingredient = reader["IngredientName"].ToString();
+                                                    int ingredientQuantity = Convert.ToInt32(reader["Quantity"]);
+
+                                                    // Subtract the ingredient quantity from the Inventory table
+                                                    double currentInventory = GetCurrentInventory(ingredient, connection);
+                                                    if (currentInventory >= 0)
+                                                    {
+                                                        double newInventory = Math.Max(currentInventory - ingredientQuantity, 0);
+                                                        UpdateInventory(ingredient, newInventory, connection);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
+
+                            transaction.Commit(); // Commit transaction if everything goes well
+                        }
+                        catch (Exception)
+                        {
+                            transaction.Rollback(); // Rollback transaction if something goes wrong
+                            throw;
                         }
                     }
 
@@ -81,36 +146,40 @@ namespace MochaPointInventory
             }
         }
 
-        private double GetCurrentInventory(string ingredientName)
+        private double GetCurrentInventory(string ingredientName, SQLiteConnection connection)
         {
-            using (var connection = GetConnection())
+            string query = "SELECT CurrentQuantity FROM Inventory WHERE IngredientName = @IngredientName";
+            using (var command = new SQLiteCommand(query, connection))
             {
-                connection.Open();
-                string query = "SELECT CurrentQuantity FROM Inventory WHERE IngredientName = @IngredientName";
-
-                using (var command = new SQLiteCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@IngredientName", ingredientName);
-
-                    object result = command.ExecuteScalar();
-                    return result != null ? Convert.ToDouble(result) : -1; // Return -1 if ingredient not found
-                }
+                command.Parameters.AddWithValue("@IngredientName", ingredientName);
+                object result = command.ExecuteScalar();
+                return result != null ? Convert.ToDouble(result) : -1; // Return -1 if ingredient not found
             }
         }
 
-        private void UpdateInventory(string ingredientName, double newQuantity)
+        private void UpdateInventory(string ingredientName, double newQuantity, SQLiteConnection connection)
         {
-            using (var connection = GetConnection())
+            string updateQuery = "UPDATE Inventory SET CurrentQuantity = @NewQuantity WHERE IngredientName = @IngredientName";
+            using (var command = new SQLiteCommand(updateQuery, connection))
             {
-                connection.Open();
-                string updateQuery = "UPDATE Inventory SET CurrentQuantity = @NewQuantity WHERE IngredientName = @IngredientName";
+                command.Parameters.AddWithValue("@NewQuantity", newQuantity);
+                command.Parameters.AddWithValue("@IngredientName", ingredientName);
+                command.ExecuteNonQuery();
+            }
+        }
 
-                using (var command = new SQLiteCommand(updateQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@NewQuantity", newQuantity);
-                    command.Parameters.AddWithValue("@IngredientName", ingredientName);
-                    command.ExecuteNonQuery();
-                }
+        private void AddIngredientToInventory(string ingredientName, double initialQuantity, string unit, SQLiteConnection connection)
+        {
+            string insertQuery = @"
+                INSERT INTO Inventory (IngredientName, CurrentQuantity, Unit, Threshold) 
+                VALUES (@IngredientName, @CurrentQuantity, @Unit, 1000)"; // Default threshold 1000
+
+            using (var command = new SQLiteCommand(insertQuery, connection))
+            {
+                command.Parameters.AddWithValue("@IngredientName", ingredientName);
+                command.Parameters.AddWithValue("@CurrentQuantity", initialQuantity);
+                command.Parameters.AddWithValue("@Unit", unit);
+                command.ExecuteNonQuery();
             }
         }
 
@@ -124,11 +193,6 @@ namespace MochaPointInventory
             this.Close();
             MainMenu mainMenuForm = new MainMenu();
             mainMenuForm.Show();
-        }
-
-        private void dataGridViewInventory_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Currently not being used
         }
     }
 }

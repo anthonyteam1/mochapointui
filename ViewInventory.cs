@@ -45,7 +45,7 @@ namespace MochaPointInventory
                             string ingredientName = reader["IngredientName"].ToString();
                             double currentQuantity = Convert.ToDouble(reader["CurrentQuantity"]);
                             string unit = reader["Unit"].ToString();
-                            double threshold = Convert.ToDouble(reader["Threshold"]);
+                            double threshold = reader["Threshold"] != DBNull.Value ? Convert.ToDouble(reader["Threshold"]) : 0;
 
                             // Add a row to the DataGridView
                             dataGridView.Rows.Add(ingredientName, currentQuantity, unit, threshold);
