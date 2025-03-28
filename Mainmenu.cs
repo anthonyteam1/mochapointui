@@ -46,13 +46,13 @@ namespace MochaPointInventory
             ingredientForm.Show();
             this.Hide();
         }
-        private void buttonIngredientReport_Click(object sender, EventArgs e)
-        {
+      //  private void buttonIngredientReport_Click(object sender, EventArgs e)
+       // {
             // Open the Ingredient Usage Report form
-            IngredientUsageReport usageReportForm = new IngredientUsageReport();
-            usageReportForm.Show(); // Show the Ingredient Usage Report form
-            this.Hide(); // Optionally hide the main menu
-        }
+        //    IngredientUsageReport usageReportForm = new IngredientUsageReport();
+          //  usageReportForm.Show(); // Show the Ingredient Usage Report form
+            //this.Hide(); // Optionally hide the main menu
+        //}
         // Event handler for Settings button click
         private void buttonSettings_Click(object sender, EventArgs e)
         {

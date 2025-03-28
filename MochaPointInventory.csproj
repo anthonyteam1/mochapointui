@@ -85,12 +85,6 @@
     <Compile Include="Ingredient.Designer.cs">
       <DependentUpon>Ingredient.cs</DependentUpon>
     </Compile>
-    <Compile Include="IngredientUsageReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="IngredientUsageReport.Designer.cs">
-      <DependentUpon>IngredientUsageReport.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoginScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,9 +131,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ingredient.resx">
       <DependentUpon>Ingredient.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="IngredientUsageReport.resx">
-      <DependentUpon>IngredientUsageReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginScreen.resx">
       <DependentUpon>LoginScreen.cs</DependentUpon>

@@ -134,7 +134,7 @@ using System.Windows.Forms;
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(504, 214);
+            this.label4.Location = new System.Drawing.Point(511, 193);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(212, 29);
             this.label4.TabIndex = 9;
@@ -142,7 +142,7 @@ using System.Windows.Forms;
             // 
             // comboBox2
             // 
-            this.comboBox2.Location = new System.Drawing.Point(534, 246);
+            this.comboBox2.Location = new System.Drawing.Point(534, 225);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(150, 24);
             this.comboBox2.TabIndex = 10;
@@ -151,7 +151,7 @@ using System.Windows.Forms;
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(511, 289);
+            this.label5.Location = new System.Drawing.Point(488, 269);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(249, 29);
             this.label5.TabIndex = 11;
@@ -159,7 +159,7 @@ using System.Windows.Forms;
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(547, 321);
+            this.numericUpDown1.Location = new System.Drawing.Point(552, 321);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -173,7 +173,7 @@ using System.Windows.Forms;
             // 
             this.buttonUpdateInventory2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.buttonUpdateInventory2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.buttonUpdateInventory2.Location = new System.Drawing.Point(534, 375);
+            this.buttonUpdateInventory2.Location = new System.Drawing.Point(516, 375);
             this.buttonUpdateInventory2.Name = "buttonUpdateInventory2";
             this.buttonUpdateInventory2.Size = new System.Drawing.Size(177, 41);
             this.buttonUpdateInventory2.TabIndex = 13;
@@ -185,11 +185,11 @@ using System.Windows.Forms;
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(510, 147);
+            this.label6.Location = new System.Drawing.Point(476, 125);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(206, 31);
+            this.label6.Size = new System.Drawing.Size(284, 31);
             this.label6.TabIndex = 14;
-            this.label6.Text = "Set New Value";
+            this.label6.Text = "Set New Stock Level";
             // 
             // ManualEntry
             // 

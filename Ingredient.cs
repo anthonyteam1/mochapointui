@@ -21,6 +21,15 @@ namespace MochaPointInventory
         {
             InitializeComponent();
             LoadIngredients();
+            this.Load += new EventHandler(this.IngredientForm_Load);
+            button1.Click += new EventHandler(buttonEditIngredient_Click);
+
+
+        }
+
+        private void IngredientForm_Load(object sender, EventArgs e)
+        {
+            PopulateComboBoxEdit();
         }
 
         // Load all ingredients from the Inventory table into DataGridView
@@ -32,7 +41,6 @@ namespace MochaPointInventory
                 using (SQLiteConnection conn = new SQLiteConnection($"Data Source={dbPath};"))
                 {
                     conn.Open();
-                    // Query to fetch data
                     string query = "SELECT IngredientName, Unit, UnitConversion FROM Inventory ORDER BY IngredientName ASC";
                     using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                     using (SQLiteDataReader reader = cmd.ExecuteReader())
@@ -42,8 +50,6 @@ namespace MochaPointInventory
                             string ingredientName = reader["IngredientName"].ToString();
                             string unit = reader["Unit"].ToString();
                             string unitConversion = reader["UnitConversion"].ToString();
-
-                            // Add the ingredient to the DataGridView
                             dataGridViewIngredients.Rows.Add(ingredientName, unit, unitConversion);
                         }
                     }
@@ -56,7 +62,28 @@ namespace MochaPointInventory
             }
         }
 
-        // Add a new ingredient to the Inventory table
+        private void PopulateComboBoxEdit()
+        {
+            comboBoxEdit.Items.Clear();
+            if (File.Exists(dbPath))
+            {
+                using (SQLiteConnection conn = new SQLiteConnection($"Data Source={dbPath};"))
+                {
+                    conn.Open();
+                    string query = "SELECT IngredientName FROM Inventory ORDER BY IngredientName ASC";
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            comboBoxEdit.Items.Add(reader["IngredientName"].ToString());
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+        }
+
         private void buttonAddIngredient_Click(object sender, EventArgs e)
         {
             string ingredientName = textBoxIngredientName.Text.Trim();
@@ -74,13 +101,12 @@ namespace MochaPointInventory
                 using (SQLiteConnection conn = new SQLiteConnection($"Data Source={dbPath};"))
                 {
                     conn.Open();
-                    // INSERT now includes CurrentQuantity with a default value of 0.
                     string query = "INSERT INTO Inventory (IngredientName, Unit, CurrentQuantity, UnitConversion) VALUES (@IngredientName, @Unit, @CurrentQuantity, @UnitConversion)";
                     using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@IngredientName", ingredientName);
                         cmd.Parameters.AddWithValue("@Unit", unit);
-                        cmd.Parameters.AddWithValue("@CurrentQuantity", 0); // Default value of 0
+                        cmd.Parameters.AddWithValue("@CurrentQuantity", 0);
                         cmd.Parameters.AddWithValue("@UnitConversion", unitConversion);
                         cmd.ExecuteNonQuery();
                     }
@@ -89,6 +115,7 @@ namespace MochaPointInventory
                 MessageBox.Show("Ingredient added successfully.");
                 ClearInputFields();
                 LoadIngredients();
+                PopulateComboBoxEdit();
             }
             else
             {
@@ -96,7 +123,6 @@ namespace MochaPointInventory
             }
         }
 
-        // Remove the selected ingredient from the Inventory table
         private void buttonRemoveIngredient_Click(object sender, EventArgs e)
         {
             if (dataGridViewIngredients.SelectedRows.Count == 0)
@@ -105,7 +131,6 @@ namespace MochaPointInventory
                 return;
             }
 
-            // Get the selected ingredient name from the DataGridView
             string ingredientName = dataGridViewIngredients.SelectedRows[0].Cells[0].Value.ToString();
 
             if (File.Exists(dbPath))
@@ -123,6 +148,7 @@ namespace MochaPointInventory
                 }
                 MessageBox.Show("Ingredient removed successfully.");
                 LoadIngredients();
+                PopulateComboBoxEdit();
             }
             else
             {
@@ -130,46 +156,51 @@ namespace MochaPointInventory
             }
         }
 
-        // Update UnitConversion for selected ingredient
-        private void dataGridViewIngredients_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void buttonEditIngredient_Click(object sender, EventArgs e)
         {
-            if (e.ColumnIndex == 2) // UnitConversion column
+            if (comboBoxEdit.SelectedItem == null)
             {
-                string ingredientName = dataGridViewIngredients.Rows[e.RowIndex].Cells[0].Value.ToString();
-                decimal unitConversion = Convert.ToDecimal(dataGridViewIngredients.Rows[e.RowIndex].Cells[2].Value);
+                MessageBox.Show("Please select an ingredient to edit.");
+                return;
+            }
+            string ingredientName = comboBoxEdit.SelectedItem.ToString();
+            string unit = textBoxEdit.Text.Trim();
+            decimal unitConversion = numericUpDownEdit.Value;
 
-                if (File.Exists(dbPath))
+            if (File.Exists(dbPath))
+            {
+                using (SQLiteConnection conn = new SQLiteConnection($"Data Source={dbPath};"))
                 {
-                    using (SQLiteConnection conn = new SQLiteConnection($"Data Source={dbPath};"))
+                    conn.Open();
+                    string query = "UPDATE Inventory SET Unit = @Unit, UnitConversion = @UnitConversion WHERE IngredientName = @IngredientName";
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                     {
-                        conn.Open();
-                        string query = "UPDATE Inventory SET UnitConversion = @UnitConversion WHERE IngredientName = @IngredientName";
-                        using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@UnitConversion", unitConversion);
-                            cmd.Parameters.AddWithValue("@IngredientName", ingredientName);
-                            cmd.ExecuteNonQuery();
-                        }
-                        conn.Close();
+                        cmd.Parameters.AddWithValue("@Unit", unit);
+                        cmd.Parameters.AddWithValue("@UnitConversion", unitConversion);
+                        cmd.Parameters.AddWithValue("@IngredientName", ingredientName);
+                        cmd.ExecuteNonQuery();
                     }
-                    MessageBox.Show("Unit conversion updated successfully.");
+                    conn.Close();
                 }
-                else
-                {
-                    MessageBox.Show("Database file not found.");
-                }
+                MessageBox.Show("Ingredient updated successfully.");
+                LoadIngredients();
+            }
+            else
+            {
+                MessageBox.Show("Database file not found.");
             }
         }
 
-        // Clear input fields after adding an ingredient
         private void ClearInputFields()
         {
             textBoxIngredientName.Text = "";
             textBoxUnit.Text = "";
             numericUpDownUnitConversion.Value = 0;
+            textBoxEdit.Text = "";
+            numericUpDownEdit.Value = 0;
+            comboBoxEdit.SelectedIndex = -1;
         }
 
-        // Back button logic
         private void buttonBack_Click(object sender, EventArgs e)
         {
             MainMenu mainMenuForm = new MainMenu();
@@ -177,10 +208,16 @@ namespace MochaPointInventory
             this.Close();
         }
 
+        // The missing event handler for DataGridView CellEndEdit
+        private void dataGridViewIngredients_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            // TODO: Add code here to handle when a cell's editing ends, if needed.
+        }
+
+        // The missing event handler for label UnitConversion Click
         private void labelUnitConversion_Click(object sender, EventArgs e)
         {
-
+            // TODO: Add code here to handle when the label is clicked, if needed.
         }
     }
 }
-

@@ -73,16 +73,16 @@
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
-            this.labelTitle.Location = new System.Drawing.Point(75, 66);
+            this.labelTitle.Location = new System.Drawing.Point(3, 56);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(273, 29);
+            this.labelTitle.Size = new System.Drawing.Size(427, 29);
             this.labelTitle.TabIndex = 3;
-            this.labelTitle.Text = "Mocha Point Inventory";
+            this.labelTitle.Text = "Mocha Point Inventory Management";
             // 
             // pictureBox
             // 
             this.pictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox.BackgroundImage")));
-            this.pictureBox.Location = new System.Drawing.Point(405, 30);
+            this.pictureBox.Location = new System.Drawing.Point(427, 32);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(256, 232);
             this.pictureBox.TabIndex = 7;
@@ -91,7 +91,7 @@
             // LoginScreen
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(691, 293);
+            this.ClientSize = new System.Drawing.Size(711, 294);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.labelPassword);

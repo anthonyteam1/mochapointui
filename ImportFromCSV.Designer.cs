@@ -39,7 +39,7 @@ namespace MochaPointInventory
             // 
             this.buttonUpdateInventory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.buttonUpdateInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.buttonUpdateInventory.Location = new System.Drawing.Point(411, 15);
+            this.buttonUpdateInventory.Location = new System.Drawing.Point(347, 15);
             this.buttonUpdateInventory.Margin = new System.Windows.Forms.Padding(4);
             this.buttonUpdateInventory.Name = "buttonUpdateInventory";
             this.buttonUpdateInventory.Size = new System.Drawing.Size(200, 37);
@@ -51,7 +51,7 @@ namespace MochaPointInventory
             // buttonAcceptChanges
             // 
             this.buttonAcceptChanges.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.buttonAcceptChanges.Location = new System.Drawing.Point(421, 458);
+            this.buttonAcceptChanges.Location = new System.Drawing.Point(365, 458);
             this.buttonAcceptChanges.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAcceptChanges.Name = "buttonAcceptChanges";
             this.buttonAcceptChanges.Size = new System.Drawing.Size(177, 41);
@@ -65,7 +65,7 @@ namespace MochaPointInventory
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.buttonBack.Location = new System.Drawing.Point(463, 507);
+            this.buttonBack.Location = new System.Drawing.Point(411, 507);
             this.buttonBack.Margin = new System.Windows.Forms.Padding(4);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(79, 34);
@@ -86,7 +86,7 @@ namespace MochaPointInventory
             this.dataGridViewInventory.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewInventory.Name = "dataGridViewInventory";
             this.dataGridViewInventory.RowHeadersWidth = 51;
-            this.dataGridViewInventory.Size = new System.Drawing.Size(1013, 390);
+            this.dataGridViewInventory.Size = new System.Drawing.Size(902, 390);
             this.dataGridViewInventory.TabIndex = 14;
             // 
             // IngredientColumn
@@ -112,7 +112,7 @@ namespace MochaPointInventory
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(967, 554);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonAcceptChanges);
             this.Controls.Add(this.buttonUpdateInventory);

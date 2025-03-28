@@ -37,7 +37,7 @@
             // 
             this.dataGridViewNotifications.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewNotifications.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewNotifications.Location = new System.Drawing.Point(23, 61);
+            this.dataGridViewNotifications.Location = new System.Drawing.Point(23, 47);
             this.dataGridViewNotifications.Name = "dataGridViewNotifications";
             this.dataGridViewNotifications.ReadOnly = true;
             this.dataGridViewNotifications.RowHeadersWidth = 51;
@@ -47,7 +47,7 @@
             // 
             // buttonBack
             // 
-            this.buttonBack.Location = new System.Drawing.Point(23, 11);
+            this.buttonBack.Location = new System.Drawing.Point(339, 453);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(100, 30);
             this.buttonBack.TabIndex = 1;
@@ -61,9 +61,9 @@
             this.labelTitle.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
             this.labelTitle.Location = new System.Drawing.Point(260, 11);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(198, 29);
+            this.labelTitle.Size = new System.Drawing.Size(235, 29);
             this.labelTitle.TabIndex = 14;
-            this.labelTitle.Text = "Notification Log";
+            this.labelTitle.Text = "Notification History";
             this.labelTitle.Click += new System.EventHandler(this.labelTitle_Click);
             // 
             // NotificationTracker
@@ -74,7 +74,7 @@
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.dataGridViewNotifications);
             this.Name = "NotificationTracker";
-            this.Text = "Notification Tracker";
+            this.Text = "Notification History";
             this.Load += new System.EventHandler(this.NotificationTracker_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNotifications)).EndInit();
             this.ResumeLayout(false);

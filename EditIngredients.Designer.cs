@@ -3,9 +3,6 @@
     partial class DrinkCreationForm
     {
         private System.ComponentModel.IContainer components = null;
-        // Left Panel Controls (Drink Creation)
-        private System.Windows.Forms.Panel panelLeft;
-        private System.Windows.Forms.Label labelCreateDrink;
         private System.Windows.Forms.TextBox textBoxDrinkName;
         private System.Windows.Forms.Label labelDrinkName;
         private System.Windows.Forms.ComboBox comboBoxIngredient;
@@ -29,8 +26,6 @@
 
         private void InitializeComponent()
         {
-            this.panelLeft = new System.Windows.Forms.Panel();
-            this.labelCreateDrink = new System.Windows.Forms.Label();
             this.labelDrinkName = new System.Windows.Forms.Label();
             this.textBoxDrinkName = new System.Windows.Forms.TextBox();
             this.labelIngredient = new System.Windows.Forms.Label();
@@ -46,40 +41,17 @@
             this.buttonRemoveDrink = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonRemoveIngredient = new System.Windows.Forms.Button();
-            this.panelLeft.SuspendLayout();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBoxAdd = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panelLeft
-            // 
-            this.panelLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panelLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLeft.Controls.Add(this.labelCreateDrink);
-            this.panelLeft.Controls.Add(this.labelDrinkName);
-            this.panelLeft.Controls.Add(this.textBoxDrinkName);
-            this.panelLeft.Controls.Add(this.labelIngredient);
-            this.panelLeft.Controls.Add(this.comboBoxIngredient);
-            this.panelLeft.Controls.Add(this.labelQuantity);
-            this.panelLeft.Controls.Add(this.numericUpDownQuantity);
-            this.panelLeft.Controls.Add(this.buttonAddIngredient);
-            this.panelLeft.Location = new System.Drawing.Point(30, 64);
-            this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Size = new System.Drawing.Size(300, 379);
-            this.panelLeft.TabIndex = 0;
-            // 
-            // labelCreateDrink
-            // 
-            this.labelCreateDrink.AutoSize = true;
-            this.labelCreateDrink.Location = new System.Drawing.Point(20, 20);
-            this.labelCreateDrink.Name = "labelCreateDrink";
-            this.labelCreateDrink.Size = new System.Drawing.Size(144, 16);
-            this.labelCreateDrink.TabIndex = 0;
-            this.labelCreateDrink.Text = "Create New Drink Entry";
             // 
             // labelDrinkName
             // 
             this.labelDrinkName.AutoSize = true;
-            this.labelDrinkName.Location = new System.Drawing.Point(20, 50);
+            this.labelDrinkName.Location = new System.Drawing.Point(14, 129);
             this.labelDrinkName.Name = "labelDrinkName";
             this.labelDrinkName.Size = new System.Drawing.Size(81, 16);
             this.labelDrinkName.TabIndex = 1;
@@ -87,7 +59,7 @@
             // 
             // textBoxDrinkName
             // 
-            this.textBoxDrinkName.Location = new System.Drawing.Point(100, 47);
+            this.textBoxDrinkName.Location = new System.Drawing.Point(115, 127);
             this.textBoxDrinkName.Name = "textBoxDrinkName";
             this.textBoxDrinkName.Size = new System.Drawing.Size(170, 22);
             this.textBoxDrinkName.TabIndex = 2;
@@ -95,7 +67,7 @@
             // labelIngredient
             // 
             this.labelIngredient.AutoSize = true;
-            this.labelIngredient.Location = new System.Drawing.Point(20, 90);
+            this.labelIngredient.Location = new System.Drawing.Point(14, 258);
             this.labelIngredient.Name = "labelIngredient";
             this.labelIngredient.Size = new System.Drawing.Size(69, 16);
             this.labelIngredient.TabIndex = 3;
@@ -105,7 +77,7 @@
             // 
             this.comboBoxIngredient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxIngredient.FormattingEnabled = true;
-            this.comboBoxIngredient.Location = new System.Drawing.Point(100, 87);
+            this.comboBoxIngredient.Location = new System.Drawing.Point(115, 255);
             this.comboBoxIngredient.Name = "comboBoxIngredient";
             this.comboBoxIngredient.Size = new System.Drawing.Size(170, 24);
             this.comboBoxIngredient.TabIndex = 4;
@@ -113,15 +85,15 @@
             // labelQuantity
             // 
             this.labelQuantity.AutoSize = true;
-            this.labelQuantity.Location = new System.Drawing.Point(20, 130);
+            this.labelQuantity.Location = new System.Drawing.Point(12, 305);
             this.labelQuantity.Name = "labelQuantity";
-            this.labelQuantity.Size = new System.Drawing.Size(58, 16);
+            this.labelQuantity.Size = new System.Drawing.Size(82, 16);
             this.labelQuantity.TabIndex = 5;
-            this.labelQuantity.Text = "Quantity:";
+            this.labelQuantity.Text = "Serving Size";
             // 
             // numericUpDownQuantity
             // 
-            this.numericUpDownQuantity.Location = new System.Drawing.Point(100, 128);
+            this.numericUpDownQuantity.Location = new System.Drawing.Point(115, 303);
             this.numericUpDownQuantity.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -143,11 +115,11 @@
             // 
             // buttonAddIngredient
             // 
-            this.buttonAddIngredient.Location = new System.Drawing.Point(100, 170);
+            this.buttonAddIngredient.Location = new System.Drawing.Point(90, 467);
             this.buttonAddIngredient.Name = "buttonAddIngredient";
             this.buttonAddIngredient.Size = new System.Drawing.Size(170, 30);
             this.buttonAddIngredient.TabIndex = 7;
-            this.buttonAddIngredient.Text = "Add Ingredient";
+            this.buttonAddIngredient.Text = "Add Ingredient/Drink";
             this.buttonAddIngredient.UseVisualStyleBackColor = true;
             this.buttonAddIngredient.Click += new System.EventHandler(this.buttonAddIngredient_Click);
             // 
@@ -185,7 +157,7 @@
             // 
             this.labelSelectDrink.AutoSize = true;
             this.labelSelectDrink.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.labelSelectDrink.Location = new System.Drawing.Point(481, 129);
+            this.labelSelectDrink.Location = new System.Drawing.Point(472, 129);
             this.labelSelectDrink.Name = "labelSelectDrink";
             this.labelSelectDrink.Size = new System.Drawing.Size(106, 20);
             this.labelSelectDrink.TabIndex = 1;
@@ -197,9 +169,9 @@
             this.labelTitle.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
             this.labelTitle.Location = new System.Drawing.Point(292, 19);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(201, 29);
+            this.labelTitle.Size = new System.Drawing.Size(176, 29);
             this.labelTitle.TabIndex = 3;
-            this.labelTitle.Text = "Ingredient Menu";
+            this.labelTitle.Text = "Drink Settings";
             // 
             // buttonRemoveDrink
             // 
@@ -209,6 +181,7 @@
             this.buttonRemoveDrink.TabIndex = 4;
             this.buttonRemoveDrink.Text = "Remove Drink";
             this.buttonRemoveDrink.UseVisualStyleBackColor = true;
+            this.buttonRemoveDrink.Click += new System.EventHandler(this.buttonRemoveDrink_Click);
             // 
             // label1
             // 
@@ -216,9 +189,9 @@
             this.label1.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(456, 76);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(333, 29);
+            this.label1.Size = new System.Drawing.Size(297, 29);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Drink and Ingredient Details";
+            this.label1.Text = "Remove Drink/Ingredient";
             // 
             // buttonRemoveIngredient
             // 
@@ -228,24 +201,69 @@
             this.buttonRemoveIngredient.TabIndex = 6;
             this.buttonRemoveIngredient.Text = "Remove Ingredient";
             this.buttonRemoveIngredient.UseVisualStyleBackColor = true;
+            this.buttonRemoveIngredient.Click += new System.EventHandler(this.buttonRemoveIngredient_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(48, 76);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(154, 29);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Create Drink";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(120, 162);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(127, 29);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Edit Drink";
+            // 
+            // comboBoxAdd
+            // 
+            this.comboBoxAdd.Location = new System.Drawing.Point(115, 201);
+            this.comboBoxAdd.Name = "comboBoxAdd";
+            this.comboBoxAdd.Size = new System.Drawing.Size(170, 24);
+            this.comboBoxAdd.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 204);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 16);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Select Drink";
             // 
             // DrinkCreationForm
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(790, 520);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.comboBoxAdd);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonRemoveIngredient);
+            this.Controls.Add(this.labelDrinkName);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBoxDrinkName);
             this.Controls.Add(this.comboBoxDrinkSelection);
+            this.Controls.Add(this.labelIngredient);
             this.Controls.Add(this.buttonRemoveDrink);
+            this.Controls.Add(this.comboBoxIngredient);
             this.Controls.Add(this.labelSelectDrink);
+            this.Controls.Add(this.labelQuantity);
             this.Controls.Add(this.labelTitle);
+            this.Controls.Add(this.numericUpDownQuantity);
             this.Controls.Add(this.listBoxDrinkIngredients);
-            this.Controls.Add(this.panelLeft);
+            this.Controls.Add(this.buttonAddIngredient);
             this.Controls.Add(this.buttonBack);
             this.Name = "DrinkCreationForm";
             this.Text = "Drink Creation and Viewer";
-            this.panelLeft.ResumeLayout(false);
-            this.panelLeft.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -258,6 +276,10 @@
         private System.Windows.Forms.Button buttonRemoveDrink;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonRemoveIngredient;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBoxAdd;
+        private System.Windows.Forms.Label label4;
     }
 }
 

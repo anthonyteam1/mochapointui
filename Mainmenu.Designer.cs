@@ -15,7 +15,6 @@ namespace MochaPointInventory
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Button buttonNotificationTracker;
-        private System.Windows.Forms.Button buttonIngredientReport; // New button
 
         private void InitializeComponent()
         {
@@ -28,7 +27,6 @@ namespace MochaPointInventory
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
             this.buttonNotificationTracker = new System.Windows.Forms.Button();
-            this.buttonIngredientReport = new System.Windows.Forms.Button();
             this.buttonEditIngredients = new System.Windows.Forms.Button();
             this.buttonIngredient = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -78,7 +76,7 @@ namespace MochaPointInventory
             // buttonExit
             // 
             this.buttonExit.BackColor = System.Drawing.Color.Red;
-            this.buttonExit.Location = new System.Drawing.Point(298, 545);
+            this.buttonExit.Location = new System.Drawing.Point(398, 489);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(200, 50);
             this.buttonExit.TabIndex = 5;
@@ -115,16 +113,6 @@ namespace MochaPointInventory
             this.buttonNotificationTracker.UseVisualStyleBackColor = true;
             this.buttonNotificationTracker.Click += new System.EventHandler(this.buttonNotificationTracker_Click);
             // 
-            // buttonIngredientReport
-            // 
-            this.buttonIngredientReport.Location = new System.Drawing.Point(398, 489);
-            this.buttonIngredientReport.Name = "buttonIngredientReport";
-            this.buttonIngredientReport.Size = new System.Drawing.Size(200, 50);
-            this.buttonIngredientReport.TabIndex = 8;
-            this.buttonIngredientReport.Text = "Ingredient Trends";
-            this.buttonIngredientReport.UseVisualStyleBackColor = true;
-            this.buttonIngredientReport.Click += new System.EventHandler(this.buttonIngredientReport_Click);
-            // 
             // buttonEditIngredients
             // 
             this.buttonEditIngredients.Location = new System.Drawing.Point(192, 433);
@@ -148,10 +136,9 @@ namespace MochaPointInventory
             // MainMenu
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(789, 602);
+            this.ClientSize = new System.Drawing.Size(789, 563);
             this.Controls.Add(this.buttonIngredient);
             this.Controls.Add(this.buttonEditIngredients);
-            this.Controls.Add(this.buttonIngredientReport);
             this.Controls.Add(this.buttonNotificationTracker);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.buttonExit);
